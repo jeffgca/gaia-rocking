@@ -10,19 +10,26 @@ APP=B2G.app
 DMG_APP_PATH=$(MOUNTPOINT)/$(APP)
 APP_PATH=$(CWD)/bin/$(APP)
 
-
 # installation of the B2G.app on OS X
 get_dmg:
+	echo "Downloading latest B2G desktop build."
 	mkdir -p ./tmp && rm -fr ./tmp/* && cd ./tmp && curl -O $(OSX)
 
 mount_dmg:
+	echo "Mounting disk image"
 	cd ./tmp && hdiutil mount $(DMG)
 
 install_app: 
+	echo "Moving B2G app to the bin dir"
 	cp -r $(DMG_APP_PATH) $(APP_PATH)
 
-setup: get_dmg mount_dmg install_app clean
+fetch_gaia:
+	echo "Fetching Gaia"
+	git submodule init && git sumbmodule update
+	echo "Installing xulrunner dependency"
+	cd ./gaia && make install-xullrunner
 
+setup: get_dmg mount_dmg install_app clean fetch_gaia
 
 # for running B2G
 generate_profile:
@@ -35,7 +42,8 @@ run: generate_profile
 
 # utility 
 clean:
-	$(shell rm -fr ./tmp/*)
+	hdiutil unmount $(MOUNTPOINT)
+	shell rm -fr ./tmp/*
 
 cleaner: clean
 	rm -fr ./bin/$(APP)
