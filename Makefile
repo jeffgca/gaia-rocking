@@ -25,7 +25,7 @@ install_app:
 
 fetch_gaia:
 	echo "Fetching Gaia"
-	git submodule init && git sumbmodule update
+	git submodule init && git submodule update
 	echo "Installing xulrunner dependency"
 	cd ./gaia && make install-xullrunner
 
