@@ -19,17 +19,19 @@ mount_dmg:
 	echo "Mounting disk image"
 	cd ./tmp && hdiutil mount $(DMG)
 
-install_app: 
+install_app: get_dmg mount_dmg
 	echo "Moving B2G app to the bin dir"
 	cp -r $(DMG_APP_PATH) $(APP_PATH) && hdiutil unmount $(MOUNTPOINT)
 
 fetch_gaia:
 	echo "Fetching Gaia"
 	git submodule init && git submodule update
-	echo "Installing xulrunner dependency"
-	cd ./gaia && make install-xullrunner
 
-setup: get_dmg mount_dmg install_app clean fetch_gaia
+fetch_xulrunner:
+	echo "Installing xulrunner dependency"
+	cd $(CWD)/gaia && make install-xulrunner
+
+setup: install_app clean fetch_gaia fetch_xulrunner
 
 # for running B2G
 generate_profile:
@@ -47,33 +49,7 @@ clean:
 cleaner: clean
 	rm -fr ./bin/$(APP)
 
-# from the gaia makefile
-# MD5SUM = md5 -r
-# SED_INPLACE_NO_SUFFIX = sed -i ''
-# DOWNLOAD_CMD = curl -s -O
+update:
+	git submodule update
 
-# update-offline-manifests:
-# 	for d in `find ./apps -mindepth 1 -maxdepth 1 -type d` ;\
-# 	do \
-# 		rm -rf $$d/manifest.appcache ;\
-# 		if [ -f $$d/manifest.webapp ] ;\
-# 		ls -1 $$d ; \
-# 		then \
-# 			echo \\t$$d ;  \
-# 			( cd $$d ; \
-# 			echo "CACHE MANIFEST" > manifest.appcache ;\
-# 			cat `find * -type f | sort -nfs` | $(MD5SUM) | cut -f 1 -d ' ' | sed 's/^/\#\ Version\ /' >> manifest.appcache ;\
-# 			find * -type f | grep -v tools | sort >> manifest.appcache ;\
-# 			$(SED_INPLACE_NO_SUFFIX) -e 's|manifest.appcache||g' manifest.appcache ;\
-# 			echo "http://$(GAIA_DOMAIN)$(GAIA_PORT)/webapi.js" >> manifest.appcache ;\
-# 			echo "NETWORK:" >> manifest.appcache ;\
-# 			echo "http://*" >> manifest.appcache ;\
-# 			echo "https://*" >> manifest.appcache ;\
-# 			) ;\
-# 		fi \
-# 	done
-
-
-
-
-
+update_app: cleaner install_app
