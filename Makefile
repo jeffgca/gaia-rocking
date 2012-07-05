@@ -21,7 +21,7 @@ mount_dmg:
 
 install_app: 
 	echo "Moving B2G app to the bin dir"
-	cp -r $(DMG_APP_PATH) $(APP_PATH)
+	cp -r $(DMG_APP_PATH) $(APP_PATH) && hdiutil unmount $(MOUNTPOINT)
 
 fetch_gaia:
 	echo "Fetching Gaia"
@@ -42,7 +42,6 @@ run: generate_profile
 
 # utility 
 clean:
-	hdiutil unmount $(MOUNTPOINT)
 	rm -fr ./tmp/*
 
 cleaner: clean
