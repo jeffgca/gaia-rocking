@@ -43,7 +43,7 @@ run: generate_profile
 # utility 
 clean:
 	hdiutil unmount $(MOUNTPOINT)
-	shell rm -fr ./tmp/*
+	rm -fr ./tmp/*
 
 cleaner: clean
 	rm -fr ./bin/$(APP)
