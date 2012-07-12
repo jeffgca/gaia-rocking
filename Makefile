@@ -1,4 +1,3 @@
-
 BASE_URL=http://ftp.mozilla.org/pub/mozilla.org/b2g/nightly/latest-mozilla-central
 
 DMG=b2g-16.0a1.en-US.mac64.dmg
@@ -35,7 +34,7 @@ setup: install_app clean fetch_gaia fetch_xulrunner
 
 # for running B2G
 generate_profile:
-	cd $(CWD)/gaia && DEBUG=1 make
+	cd $(CWD)/gaia && DEBUG=1 GAIA_PORT=:7999 make
 
 run: generate_profile
 	$(APP_PATH)/Contents/MacOS/b2g -profile $(CWD)/gaia/profile &
