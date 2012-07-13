@@ -4,9 +4,8 @@ This repo is a shell you can use to set up a Gaia hacking environment.
 
 ## TL;DR
 
-    git clone git://github.com/canuckistani/gaia-rocking.git
+    git clone --recursive git://github.com/canuckistani/gaia-rocking.git
     cd ./gaia-rocking
-    git submodule init
     make setup
 
 You can run B2G desktop in two different ways with this setup:
