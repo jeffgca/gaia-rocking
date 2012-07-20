@@ -17,6 +17,7 @@ You can run B2G desktop in two different ways with this setup:
 
 ### Caveats: 
   * OS X only ( so far, Linux should be easy, Windows likely painful )
+  * UPDATE: you may need to run `sudo make run` on OS X in order to get this to work!
 
 ### Works: 
 
