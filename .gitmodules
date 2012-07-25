@@ -1,0 +1,3 @@
+[submodule "profile"]
+	path = profile
+	url = git@github.com:canuckistani/b2g-desktop-profile.git
