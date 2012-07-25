@@ -1,0 +1,4 @@
+node_modules
+bin/*.app
+tmp/*
+app/*
