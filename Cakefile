@@ -9,9 +9,6 @@ L = util.puts
 D = util.inspect
 F = util.format
 
-
-
-
 u = require("./lib/b2gutils")
 bin_dir = path.join(process.cwd(), 'bin')
 tmp_dir = path.join(process.cwd(), 'tmp')
