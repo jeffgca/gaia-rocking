@@ -22,8 +22,10 @@ task 'run', 'run b2g desktop', ->
 
 task 'update_osx', 'Update on OS X', ->
 	# ...
+	L "Downloading..."
 	u.get_latest_build bin_dir, (result) -> 
 		filename = path.basename(result)
+		L F "Downloaded file %s", filename
 		mounted = '/Volumes/B2G/B2G.app'
 
 		# mount the dmg
@@ -69,7 +71,9 @@ task 'update_windows', 'Update on Windows', ->
 
 
 task 'update', 'Install or update the local copy of B2G Desktop', ->
+	L "Updating B2G"
 	if platform == 'darwin'
+		L "Detected OS X platform..."
 		invoke 'update_osx'
 	else if platform == 'linux'
 		invoke 'update_linux'
