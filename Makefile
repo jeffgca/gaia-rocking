@@ -1,5 +1,6 @@
-BASE_URL=http://ftp.mozilla.org/pub/mozilla.org/b2g/nightly/2012-07-21-03-06-00-mozilla-central/
-
+BASE_URL=http://ftp.mozilla.org/pub/mozilla.org/b2g/nightly/2012-07-21-03-06-00-mozilla-central
+SYS=$(shell uname -s)
+ARCH?=$(shell uname -m)
 DMG=b2g-16.0a1.en-US.mac64.dmg
 OSX=$(BASE_URL)/$(DMG)
 
@@ -22,15 +23,10 @@ install_app: get_dmg mount_dmg
 	echo "Moving B2G app to the bin dir"
 	cp -r $(DMG_APP_PATH) $(APP_PATH) && hdiutil unmount $(MOUNTPOINT)
 
-# fetch_gaia:
-# 	echo "Fetching Gaia"
-# 	git submodule init && git submodule update
+install_xulrunner:
+	cd $(CWD)/gaia && make install-xulrunner-sdk
 
-# fetch_xulrunner:
-# 	echo "Installing xulrunner dependency"
-# 	cd $(CWD)/gaia && make install-xulrunner
-
-setup: install_app clean
+setup: install_app install_xulrunner clean
 
 # for running B2G
 generate_profile:
