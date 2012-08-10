@@ -25,6 +25,11 @@ You can run B2G desktop in two different ways with this setup:
   * updating Gaia as a git submodule
   * running B2G desktop from a helper .app using AppleScript.
 
+### Advanced
+
+  * to use a different gaia source directory, simple create a local.mk file in the gaia-rocking root directory and add something like:
+    * GAIA_SRC?=/path/to/my/gaia
+
 ### TODO:
 
   * adding your own apps as submodules
