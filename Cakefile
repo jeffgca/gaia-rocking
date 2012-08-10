@@ -67,9 +67,6 @@ task 'update_windows', 'Update on Windows', ->
 			exec cleanup_cmd, (err, stdout, stderr) ->
 				L "Updated B2G desktop"
 
-
-
-
 task 'update', 'Install or update the local copy of B2G Desktop', ->
 	L "Updating B2G"
 	if platform == 'darwin'
