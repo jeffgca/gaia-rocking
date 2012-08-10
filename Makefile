@@ -33,7 +33,8 @@ setup: install_app install_xulrunner clean
 
 # for running B2G
 generate_profile:
-	cd $(GAIA_SRC) && make && DEBUG=1 GAIA_PORT=:7999 make
+	# cd $(GAIA_SRC) && make && DEBUG=1 GAIA_PORT=:7999 make
+	cd $(GAIA_SRC) && make
 
 run: generate_profile
 	$(APP_PATH)/Contents/MacOS/b2g -profile $(GAIA_SRC)/profile &
