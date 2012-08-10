@@ -27,17 +27,16 @@ install_app: get_dmg mount_dmg
 	cp -r $(DMG_APP_PATH) $(APP_PATH) && hdiutil unmount $(MOUNTPOINT)
 
 install_xulrunner:
-	cd $(CWD)/gaia && make install-xulrunner-sdk
+	cd $(GAIA_SRC) && make install-xulrunner-sdk
 
 setup: install_app install_xulrunner clean
 
 # for running B2G
 generate_profile:
-	cd $(CWD)/gaia && DEBUG=1 GAIA_PORT=:7999 make
-	# cd $(CWD)/gaia && make
+	cd $(GAIA_SRC) && make && DEBUG=1 GAIA_PORT=:7999 make
 
 run: generate_profile
-	$(APP_PATH)/Contents/MacOS/b2g -profile $(CWD)/gaia/profile &
+	$(APP_PATH)/Contents/MacOS/b2g -profile $(GAIA_SRC)/profile &
 	sleep 1 && osascript -e 'tell app "B2G" to activate'
 
 # utility 
