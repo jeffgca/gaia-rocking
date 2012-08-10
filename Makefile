@@ -1,10 +1,13 @@
-BASE_URL=http://ftp.mozilla.org/pub/mozilla.org/b2g/nightly/2012-07-21-03-06-00-mozilla-central
+-include local.mk
+
+BASE_URL=http://ftp.mozilla.org/pub/mozilla.org/b2g/nightly/latest-mozilla-central/
 SYS=$(shell uname -s)
 ARCH?=$(shell uname -m)
 DMG=b2g-16.0a1.en-US.mac64.dmg
 OSX=$(BASE_URL)/$(DMG)
 
 CWD=`pwd`
+GAIA_SRC?=$(CWD)/gaia
 MOUNTPOINT=/Volumes/B2G
 APP=B2G.app
 DMG_APP_PATH=$(MOUNTPOINT)/$(APP)
