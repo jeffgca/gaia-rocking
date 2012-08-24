@@ -39,4 +39,4 @@ You can run B2G desktop in two different ways with this setup:
 
 ## Future possibilities:
 
-  * automate creating an app shell using jrburkes responsive-template or longster's mason?
+  * automate creating an app shell using jrburkes responsive-template or longster's mortar?
